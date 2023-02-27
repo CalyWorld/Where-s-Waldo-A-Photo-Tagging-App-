@@ -32,18 +32,32 @@ export const GetPosition = () => {
   const getPosition = (e, setModal) => {
     const getX = e.clientX - e.target.offsetLeft;
     const getY = e.clientY - e.target.offsetTop;
-
-    console.log(getX, getY);
-
     setPosition({ x: getX + 30, y: getY + 50 });
     setModal(true);
   };
 
-  console.log(photoTagInfo.map((eachPhoto)=>eachPhoto.src))
+  console.log(mousePosition);
+
+  const setCoordinates = (image) => {
+    setPhotoTagging(
+      photoTagInfo.map((eachPhoto) =>
+        eachPhoto.id === image.id
+          ? { ...eachPhoto, x: mousePosition.x - 30, y: mousePosition.y - 50 }
+          : eachPhoto
+      )
+    );
+  };
+
+  console.log(photoTagInfo);
 
   return (
     <>
-      <Waldo mousePosition={mousePosition} photoTagInfo={photoTagInfo} getPosition={getPosition} />
+      <Waldo
+        mousePosition={mousePosition}
+        photoTagInfo={photoTagInfo}
+        getPosition={getPosition}
+        setCoordinates={setCoordinates}
+      />
     </>
   );
 };
