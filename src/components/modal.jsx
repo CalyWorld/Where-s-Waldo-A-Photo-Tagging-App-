@@ -1,9 +1,6 @@
 import React from "react";
-import waldoP from "/Users/cal/Where-s-Waldo-A-Photo-Tagging-App-/src/assets/waldoP.png";
-import odlaw from "/Users/cal/Where-s-Waldo-A-Photo-Tagging-App-/src/assets/odlaw.jpg";
-import wizard from "/Users/cal/Where-s-Waldo-A-Photo-Tagging-App-/src/assets/wizard.jpeg";
-export const Modal = ({ setModal, mousePosition }) => {
-  console.log(mousePosition.y, mousePosition.x);
+export const Modal = ({ photoTagInfo, setModal, mousePosition }) => {
+  console.log(mousePosition.x, mousePosition.y);
 
   return (
     <div
@@ -11,25 +8,15 @@ export const Modal = ({ setModal, mousePosition }) => {
         position: "absolute",
         left: `${mousePosition.x}px`,
         top: `${mousePosition.y}px`,
+        width: "150px",
+        background: "white"
       }}
     >
-      <ul>
-        {" "}
-        <li className="flex flex-col w-40 justify-start bg-slate-50 items-start">
-          <span className="flex flex-row w-40 justify-end">
-            <button
-              onClick={() => {
-                setModal(false);
-              }}
-            >
-              X
-            </button>
-          </span>
-          <img className="h-10 w-10" src={waldoP} alt="left" />
-          <img className="h-10 w-10" src={odlaw} alt="middle" />
-          <img className="h-10 w-10" src={wizard} alt="wizard" />
-        </li>
-      </ul>
+        <span className="flex justify-end"><i className="fa-solid fa-xmark w-5" onClick={()=>{setModal(false)}}></i></span>
+        {photoTagInfo.map((eachPhoto)=>
+        <div key={eachPhoto.id}>
+            <img src={eachPhoto.src} className="w-10 h-10"/>
+        </div>)}
     </div>
   );
 };
