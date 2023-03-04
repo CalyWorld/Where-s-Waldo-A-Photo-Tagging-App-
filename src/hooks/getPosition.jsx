@@ -1,33 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Waldo } from "../components/waldo";
-import { v4 as uuidv4 } from "uuid";
-import waldoP from "/Users/cal/Where-s-Waldo-A-Photo-Tagging-App-/src/assets/waldoP.png";
-import odlaw from "/Users/cal/Where-s-Waldo-A-Photo-Tagging-App-/src/assets/odlaw.jpg";
-import wizard from "/Users/cal/Where-s-Waldo-A-Photo-Tagging-App-/src/assets/wizard.jpeg";
 
-export const GetPosition = () => {
+export const GetPosition = ({photoTag, setPhotoTag}) => {
   const [mousePosition, setPosition] = useState({});
 
-  const [photoTagInfo, setPhotoTagging] = useState([
-    {
-      src: waldoP,
-      x: "",
-      y: "",
-      id: uuidv4(),
-    },
-    {
-      src: odlaw,
-      x: "",
-      y: "",
-      id: uuidv4(),
-    },
-    {
-      src: wizard,
-      x: "",
-      y: "",
-      id: uuidv4(),
-    },
-  ]);
 
   const getPosition = (e, setModal) => {
     const getX = e.clientX - e.target.offsetLeft;
@@ -36,11 +12,11 @@ export const GetPosition = () => {
     setModal(true);
   };
 
-  console.log(mousePosition);
+  // console.log(mousePosition);
 
-  const setCoordinates = (image) => {
-    setPhotoTagging(
-      photoTagInfo.map((eachPhoto) =>
+  const setCoordinates =  (image) => {
+    setPhotoTag(
+      photoTag.map((eachPhoto) =>
         eachPhoto.id === image.id
           ? { ...eachPhoto, x: mousePosition.x - 30, y: mousePosition.y - 50 }
           : eachPhoto
@@ -48,13 +24,27 @@ export const GetPosition = () => {
     );
   };
 
-  console.log(photoTagInfo);
+  console.log(photoTag);
+
+  // useEffect(()=>{
+  //   const q = query(collection(db, "waldo"));
+  //   const unsub = onSnapshot(q, (QuerySnapshot)=>{
+  //     const waldoArray = [];
+  //     QuerySnapshot.forEach((doc)=>{
+  //       waldoArray.push({...doc.data(), id:doc.id});
+  //     });
+  //     setPhotoTagging(waldoArray);
+  //     console.log(waldoArray);
+  //   });
+  //   return () => unsub();
+  // }, []);
+
 
   return (
     <>
       <Waldo
         mousePosition={mousePosition}
-        photoTagInfo={photoTagInfo}
+        photoTagInfo={photoTag}
         getPosition={getPosition}
         setCoordinates={setCoordinates}
       />
