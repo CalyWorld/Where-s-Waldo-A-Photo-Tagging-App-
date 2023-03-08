@@ -1,19 +1,18 @@
 import React from "react";
 export const Modal = ({
-  photoTagInfo,
+  data,
   setModal,
-  mousePosition,
-  setCoordinates,
+  clickPosition,
+  checkCoordinates,
 }) => {
-  // console.log(mousePosition.x, mousePosition.y);
 
   return (
     <div
       style={{
         position: "absolute",
-        left: `${mousePosition.x}px`,
-        top: `${mousePosition.y}px`,
-        width: "150px",
+        left: `${clickPosition.x}%`,
+        top: `${clickPosition.y}%`,
+        width: "25%",
         background: "white",
       }}
     >
@@ -21,13 +20,13 @@ export const Modal = ({
       <i className="fa-solid fa-xmark" onClick={()=>{setModal(false
         )}}></i>
       </span>
-      {photoTagInfo.map((eachPhoto) => (
-        <div key={eachPhoto.id}>
+      {data.map((eachData) => (
+        <div key={eachData.id}>
           <img
-            src={eachPhoto.src}
+            src={eachData.src}
             className="w-10 h-10"
             onClick={() => {
-              setCoordinates(eachPhoto);
+              checkCoordinates(eachData);
             }}
             alt="drop-down"
           />
