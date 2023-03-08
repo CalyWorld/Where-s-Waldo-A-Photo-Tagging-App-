@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Modal } from "./modal";
 import waldo from "/Users/cal/Where-s-Waldo-A-Photo-Tagging-App-/src/assets/waldo.jpeg";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
 
 export const Waldo = ({ openModal, setModal }) => {
@@ -44,22 +44,32 @@ export const Waldo = ({ openModal, setModal }) => {
     fetchData();
   }, []);
 
-  const checkCoordinates = (data) => {
+  const checkCoordinates = async (eachData) => {
     let xCoord = clickPosition.x;
     let yCoord = clickPosition.y;
     console.log(clickPosition.x, clickPosition.y);
-    console.log(data);
+    console.log(eachData);
     if (
-      data.x - 3 <= xCoord &&
-      xCoord <= data.x + 3 &&
-      data.y - 3 <= yCoord &&
-      yCoord <= data.y + 3
+      eachData.x - 3 <= xCoord &&
+      xCoord <= eachData.x + 3 &&
+      eachData.y - 3 <= yCoord &&
+      yCoord <= eachData.y + 3
     ) {
+      let updatedArray = data.map((eachWaldo) =>
+        eachWaldo.id === eachData.id ? { ...eachWaldo, found: true } : eachWaldo
+      );
+      setFireStoreData(updatedArray);
+      await updateDoc(doc(db, "waldo", "waldoCollection"), {
+        array: updatedArray,
+      });
+      setModal(false);
       console.log("it matches");
     } else {
       console.log("it does not match");
     }
   };
+
+  console.log(data);
 
   return (
     <div className="flex flex-row justify-center items-center relative">
