@@ -1,102 +1,57 @@
 import "./App.css";
-import React, { useState, useEffect } from "react";
-import { Header } from "./pages/Header/header";
-import { GetPosition } from "./hooks/getPosition";
+import React from "react";
 import { v4 as uuidv4 } from "uuid";
 import waldoP from "/Users/cal/Where-s-Waldo-A-Photo-Tagging-App-/src/assets/waldoP.png";
 import odlaw from "/Users/cal/Where-s-Waldo-A-Photo-Tagging-App-/src/assets/odlaw.jpg";
 import wizard from "/Users/cal/Where-s-Waldo-A-Photo-Tagging-App-/src/assets/wizard.jpeg";
-import {db} from "./firebase";
-import {collection, doc, setDoc, addDoc} from "firebase/firestore";
+import { db } from "./firebase";
+import { doc, setDoc} from "firebase/firestore";
+import { MainWaldo } from "./hooks/mainWaldo";
 
 function App() {
-  const [time, setTime] = useState(0);
-  // const [running, setRunning] = useState(false);
-
   let data = [
     {
       src: waldoP,
-      x: "",
-      y: "",
+      x: 52,
+      y: 58,
       id: uuidv4(),
+      found: false,
     },
     {
       src: odlaw,
-      x: "",
-      y: "",
+      x: 24,
+      y: 56,
       id: uuidv4(),
+      found: false,
     },
     {
       src: wizard,
-      x: "",
-      y: "",
+      x: 62,
+      y: 58,
       id: uuidv4(),
+      found: false,
     },
   ];
 
-  let defaultData = [
-    {
-      src: waldoP,
-      x: 502,
-      y: 307,
-      id: uuidv4(),
-    },
-    {
-      src: odlaw,
-      x: 119,
-      y: 174,
-      id: uuidv4(),
-    },
-    {
-      src: wizard,
-      x: 302,
-      y: 175,
-      id: uuidv4(),
-    },
-  ];
+  const sendToFireStore = async (fireStoreData) => {
+    try {
+      await setDoc(doc(db, "waldo", "waldoCollection"), {
+        array: fireStoreData.map((data) => data),
+      });
+      return () => {
+        console.log("succesfully store in firestore");
+      };
+    } catch (error) {
+      console.log("not succesfuly stored in firestore", error);
+    }
+  };
 
-  const [photoTag, setPhotoTag] = useState(data);
-  
-  const sendToFireStore  = async () =>{
-    await setDoc(doc(db, "waldo", "eachWaldo"),{
-      array: defaultData.map((eachWaldo)=>eachWaldo)
-    });
-  }
+  sendToFireStore(data);
 
-  sendToFireStore()
-  // useEffect(() => {
-  //   let interval;
-  //   if (running) {
-  //     interval = setInterval(() => {
-  //       setTime((prevTime) => prevTime + 10);
-  //     }, 10);
-  //   } else if (!running) {
-  //     clearInterval(interval);
-  //   }
-  //   return () => clearInterval(interval);
-  // }, [running]);
-
-  // const startRunning = () =>{
-  //   window.addEventListener("load", e => setRunning(true));
-  // }
-
-  // // startRunning();
-
-  // const stopRunning = () =>{
-  //   setRunning(false);
-  // }
-  // const resetTimer = () =>{
-  //   setTime(0);
-  // }
 
   return (
     <div className="App">
-      <header>
-        <Header time={time} />
-      </header>
-      <section>
-        <GetPosition photoTag={photoTag} setPhotoTag={setPhotoTag} />
-      </section>
+      <MainWaldo/>
     </div>
   );
 }

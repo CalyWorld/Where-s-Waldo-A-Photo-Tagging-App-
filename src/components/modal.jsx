@@ -3,7 +3,7 @@ export const Modal = ({
   data,
   setModal,
   clickPosition,
-  checkCoordinates,
+  checkCoord,
 }) => {
 
   return (
@@ -20,13 +20,13 @@ export const Modal = ({
       <i className="fa-solid fa-xmark" onClick={()=>{setModal(false
         )}}></i>
       </span>
-      {data.map((eachData) => (
-        <div key={eachData.id}>
+      {data.map((eachPhoto) => (
+        <div key={eachPhoto.id}>
           <img
-            src={eachData.src}
+            src={eachPhoto.src}
             className="w-10 h-10"
             onClick={() => {
-              checkCoordinates(eachData);
+              checkCoord(eachPhoto);
             }}
             alt="drop-down"
           />

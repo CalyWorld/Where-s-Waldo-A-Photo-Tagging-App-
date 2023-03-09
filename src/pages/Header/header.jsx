@@ -1,10 +1,9 @@
 import React from "react";
-import { Timer } from "../../hooks/timer";
 import waldoP from "/Users/cal/Where-s-Waldo-A-Photo-Tagging-App-/src/assets/waldoP.png"
 import odlaw from "/Users/cal/Where-s-Waldo-A-Photo-Tagging-App-/src/assets/odlaw.jpg"
 import wizard from "/Users/cal/Where-s-Waldo-A-Photo-Tagging-App-/src/assets/wizard.jpeg"
 
-export const Header = ({ time }) => {
+export const Header = () => {
   return (
     <div className="flex flex-col">
       <ul className="flex flex-row justify-center">

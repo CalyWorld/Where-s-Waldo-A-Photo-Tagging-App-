@@ -1,22 +1,21 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Modal } from "./modal";
 import waldo from "/Users/cal/Where-s-Waldo-A-Photo-Tagging-App-/src/assets/waldo.jpeg";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
 
-export const Waldo = ({ openModal, setModal }) => {
+export const Waldo = ({ openModal, setModal, data, setFirestoreData }) => {
   const [clickPosition, setClickPosition] = useState({ x: 0, y: 0 });
-  const [data, setFireStoreData] = useState([]);
   const imgRef = useRef(null);
 
+   //get coordinates in percentage
   const getPosition = (event) => {
-    //get coordinates in percentage
+    setModal(true);
     const { clientWidth, clientHeight } = imgRef.current;
     const { clientX, clientY } = event;
     const xPercent = (clientX / clientWidth) * 100;
     const yPercent = (clientY / clientHeight) * 100;
     setClickPosition({ x: xPercent, y: yPercent });
-    setModal(true);
   };
 
   useEffect(() => {
@@ -34,17 +33,7 @@ export const Waldo = ({ openModal, setModal }) => {
     return () => window.removeEventListener("resize", handleResize);
   }, [clickPosition]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const docRef = doc(db, "waldo", "waldoCollection");
-      const document = await getDoc(docRef);
-      let data = document.data().array;
-      setFireStoreData(data);
-    };
-    fetchData();
-  }, []);
-
-  const checkCoordinates = async (eachData) => {
+  const checkCoord = async (eachData) => {
     let xCoord = clickPosition.x;
     let yCoord = clickPosition.y;
     console.log(clickPosition.x, clickPosition.y);
@@ -58,7 +47,7 @@ export const Waldo = ({ openModal, setModal }) => {
       let updatedArray = data.map((eachWaldo) =>
         eachWaldo.id === eachData.id ? { ...eachWaldo, found: true } : eachWaldo
       );
-      setFireStoreData(updatedArray);
+      setFirestoreData(updatedArray);
       await updateDoc(doc(db, "waldo", "waldoCollection"), {
         array: updatedArray,
       });
@@ -68,6 +57,11 @@ export const Waldo = ({ openModal, setModal }) => {
       console.log("it does not match");
     }
   };
+
+
+  // const isGameOver = () =>{
+
+  // }
 
   console.log(data);
 
@@ -86,7 +80,7 @@ export const Waldo = ({ openModal, setModal }) => {
           data={data}
           setModal={setModal}
           clickPosition={clickPosition}
-          checkCoordinates={checkCoordinates}
+          checkCoord={checkCoord}
         />
       )}
     </div>
