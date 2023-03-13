@@ -1,8 +1,21 @@
-import React from "react";
+import React, {useEffect } from "react";
 import waldoP from "/Users/cal/Where-s-Waldo-A-Photo-Tagging-App-/src/assets/waldoP.png";
 import odlaw from "/Users/cal/Where-s-Waldo-A-Photo-Tagging-App-/src/assets/odlaw.jpg";
 import wizard from "/Users/cal/Where-s-Waldo-A-Photo-Tagging-App-/src/assets/wizard.jpeg";
-export const Header = ({ matchFound, showMatchFound }) => {
+export const Header = ({ matchFound, setFound, showMatchFound, setShowMatchFound }) => {
+
+  useEffect(()=>{
+    if(matchFound === true){
+      setShowMatchFound(true)
+      const timeourId = setTimeout(() => {
+        setShowMatchFound(false)
+        setFound(false);
+      }, 2000);
+      return () =>
+        clearTimeout(timeourId);
+    }
+  },[matchFound, setShowMatchFound, setFound]);
+
 
   return (
     <div>
