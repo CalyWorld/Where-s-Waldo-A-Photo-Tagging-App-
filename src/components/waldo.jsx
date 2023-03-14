@@ -1,15 +1,31 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Modal } from "./modal";
 import waldo from "/Users/cal/Where-s-Waldo-A-Photo-Tagging-App-/src/assets/waldo.jpeg";
-import { doc, updateDoc } from "firebase/firestore";
-import { db } from "../firebase";
-
-export const Waldo = ({ openModal, setModal, data, setFirestoreData }) => {
+// import { WinnerForm } from "./winnerForm";
+export const Waldo = ({
+  openModal,
+  setModal,
+  data,
+  setFirestoreData,
+  Dropdown,
+  CheckCoord,
+  setFound,
+  setShowMatchFound,
+}) => {
   const [clickPosition, setClickPosition] = useState({ x: 0, y: 0 });
   const imgRef = useRef(null);
+  const isFoundTrue = data.every((obj) => obj.found);
+ 
+  console.log(isFoundTrue);
 
-   //get coordinates in percentage
-  const getPosition = (event) => {
+  const game = (event) => {
+    if(isFoundTrue === false){
+      getCoords(event)
+    }else if(isFoundTrue === true){
+      console.log("Game Won");
+    }
+  }
+  //get coordinates in percentage
+  const getCoords = (event) => {
     setModal(true);
     const { clientWidth, clientHeight } = imgRef.current;
     const { clientX, clientY } = event;
@@ -18,6 +34,7 @@ export const Waldo = ({ openModal, setModal, data, setFirestoreData }) => {
     setClickPosition({ x: xPercent, y: yPercent });
   };
 
+  //adjust the coordinates clicked based on window resize
   useEffect(() => {
     const handleResize = () => {
       const { clientWidth, clientHeight } = imgRef.current;
@@ -33,55 +50,29 @@ export const Waldo = ({ openModal, setModal, data, setFirestoreData }) => {
     return () => window.removeEventListener("resize", handleResize);
   }, [clickPosition]);
 
-  const checkCoord = async (eachData) => {
-    let xCoord = clickPosition.x;
-    let yCoord = clickPosition.y;
-    console.log(clickPosition.x, clickPosition.y);
-    console.log(eachData);
-    if (
-      eachData.x - 3 <= xCoord &&
-      xCoord <= eachData.x + 3 &&
-      eachData.y - 3 <= yCoord &&
-      yCoord <= eachData.y + 3
-    ) {
-      let updatedArray = data.map((eachWaldo) =>
-        eachWaldo.id === eachData.id ? { ...eachWaldo, found: true } : eachWaldo
-      );
-      setFirestoreData(updatedArray);
-      await updateDoc(doc(db, "waldo", "waldoCollection"), {
-        array: updatedArray,
-      });
-      setModal(false);
-      console.log("it matches");
-    } else {
-      console.log("it does not match");
-    }
-  };
-
-
-  // const isGameOver = () =>{
-
-  // }
-
-  console.log(data);
+  // console.log(clickPosition);
+  // console.log(data);
 
   return (
     <div className="flex flex-row justify-center items-center relative">
-      <img
-        src={waldo}
-        ref={imgRef}
-        alt="background"
-        onClick={(e) => {
-          getPosition(e);
-        }}
-      />
-      {openModal && (
-        <Modal
-          data={data}
-          setModal={setModal}
-          clickPosition={clickPosition}
-          checkCoord={checkCoord}
-        />
+          <img
+            src={waldo}
+            ref={imgRef}
+            alt="background"
+            onClick={(e) => {
+              game(e);
+            }}
+          />
+          {openModal && (
+            <Dropdown
+              data={data}
+              setModal={setModal}
+              clickPosition={clickPosition}
+              CheckCoord={CheckCoord}
+              setFirestoreData={setFirestoreData}
+              setFound={setFound}
+              setShowMatchFound={setShowMatchFound}
+            />
       )}
     </div>
   );
