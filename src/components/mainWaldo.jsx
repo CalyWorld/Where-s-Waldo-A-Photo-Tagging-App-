@@ -9,6 +9,7 @@ export const MainWaldo = ({ Header, Waldo, defaultData }) => {
   const [openModal, setModal] = useState(false);
   const [matchFound, setFound] = useState(false);
   const [showMatchFound, setShowMatchFound] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   //get data from firestore and store in state variable "data"
   useEffect(() => {
@@ -18,12 +19,18 @@ export const MainWaldo = ({ Header, Waldo, defaultData }) => {
         const document = await getDoc(docRef);
         let data = document.data().array;
         setFirestoreData(data);
+        setIsLoading(false);
       } catch (error) {
         console.log("Data not sucessfully gotten from firestore", error);
+        setIsLoading(false)
       }
     };
     fetchData();
   }, []);
+
+  if(isLoading){
+    return <div>Loading...</div>
+  }
 
   return (
     <div>
