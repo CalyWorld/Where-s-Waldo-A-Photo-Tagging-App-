@@ -10,22 +10,12 @@ export const CheckCoord = async (
   setFound,
   setShowMatchFound
 ) => {
-  console.log(eachPhoto);
-  const updatePhotoRange = () => {
-    const updatedDataRange = data.map((eachData) =>
-      eachData.id === eachPhoto.id
-        ? { ...eachData, range: window.innerWidth <= 768 ? 20 : 10 }
-        : eachData
-    );
-    setFirestoreData(updatedDataRange);
-  };
-  window.addEventListener("resize", updatePhotoRange);
-//   window.removeEventListener("resize", updatePhotoRange);
+
   if (
-    eachPhoto.x - eachPhoto.range <= xCoord &&
-    xCoord <= eachPhoto.x + eachPhoto.range &&
-    eachPhoto.y - eachPhoto.range <= yCoord &&
-    yCoord <= eachPhoto.y + eachPhoto.range
+    eachPhoto.x - 3 <= xCoord &&
+    xCoord <= eachPhoto.x + 3 &&
+    eachPhoto.y - 10 <= yCoord &&
+    yCoord <= eachPhoto.y + 10
   ) {
     let updatedArray = data.map((eachWaldo) =>
       eachWaldo.id === eachPhoto.id ? { ...eachPhoto, found: true } : eachWaldo
@@ -48,4 +38,6 @@ export const CheckCoord = async (
     setShowMatchFound(true);
     setFound(false);
   }
+
+  
 };

@@ -5,11 +5,13 @@ import waldoP from "/Users/cal/Where-s-Waldo-A-Photo-Tagging-App-/src/assets/wal
 import odlaw from "/Users/cal/Where-s-Waldo-A-Photo-Tagging-App-/src/assets/odlaw.jpg";
 import wizard from "/Users/cal/Where-s-Waldo-A-Photo-Tagging-App-/src/assets/wizard.jpeg";
 import { db } from "./firebase";
-import { doc, setDoc} from "firebase/firestore";
-import { MainWaldo } from "./hooks/mainWaldo";
+import { doc, setDoc } from "firebase/firestore";
+import { MainWaldo } from "./components/mainWaldo";
+import { Waldo } from "./components/waldo";
+import { Header } from "./components/header";
 
 function App() {
-  let data = [
+  let defaultData = [
     {
       src: waldoP,
       x: 52,
@@ -45,13 +47,12 @@ function App() {
       console.log("not succesfuly stored in firestore", error);
     }
   };
-
-  sendToFireStore(data);
-
+  
+  sendToFireStore(defaultData);
 
   return (
     <div className="App">
-      <MainWaldo/>
+      <MainWaldo Header={Header} Waldo={Waldo} defaultData={defaultData} />
     </div>
   );
 }

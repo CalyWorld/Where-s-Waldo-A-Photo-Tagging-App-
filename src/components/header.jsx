@@ -5,12 +5,12 @@ import wizard from "/Users/cal/Where-s-Waldo-A-Photo-Tagging-App-/src/assets/wiz
 export const Header = ({ matchFound, setFound, showMatchFound, setShowMatchFound }) => {
 
   useEffect(()=>{
-    if(matchFound === true){
+    if(matchFound){
       setShowMatchFound(true)
       const timeourId = setTimeout(() => {
         setShowMatchFound(false)
         setFound(false);
-      }, 2000);
+      }, 500);
       return () =>
         clearTimeout(timeourId);
     }
