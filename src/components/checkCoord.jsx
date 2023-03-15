@@ -11,6 +11,8 @@ export const CheckCoord = async (
   setShowMatchFound
 ) => {
 
+  console.log(xCoord, yCoord);
+  console.log(eachPhoto.x, eachPhoto.y);
   if (
     eachPhoto.x - 3 <= xCoord &&
     xCoord <= eachPhoto.x + 3 &&
@@ -28,15 +30,9 @@ export const CheckCoord = async (
     setFound(true);
     setShowMatchFound(true);
   } else {
-    let updatedArray = data.map((eachWaldo) =>
-      eachWaldo.id === eachPhoto.id ? { ...eachPhoto, found: false } : eachWaldo
-    );
-    setFirestoreData(updatedArray);
-    await updateDoc(doc(db, "waldo", "waldoCollection"), {
-      array: updatedArray,
-    });
     setShowMatchFound(true);
     setFound(false);
+    return;
   }
 
   

@@ -4,14 +4,12 @@ import { v4 as uuidv4 } from "uuid";
 import waldoP from "/Users/cal/Where-s-Waldo-A-Photo-Tagging-App-/src/assets/waldoP.png";
 import odlaw from "/Users/cal/Where-s-Waldo-A-Photo-Tagging-App-/src/assets/odlaw.jpg";
 import wizard from "/Users/cal/Where-s-Waldo-A-Photo-Tagging-App-/src/assets/wizard.jpeg";
-import { db } from "./firebase";
-import { doc, setDoc } from "firebase/firestore";
-import { MainWaldo } from "./components/mainWaldo";
-import { Waldo } from "./components/waldo";
-import { Header } from "./components/header";
-
+import { MainWaldo } from "./components/MainWaldo";
+import { Waldo } from "./components/Waldo";
+import { Header } from "./components/Header";
+import { sendToFireStore } from "./components/sendToFireStore";
 function App() {
-  let defaultData = [
+  let data = [
     {
       src: waldoP,
       x: 52,
@@ -35,24 +33,11 @@ function App() {
     },
   ];
 
-  const sendToFireStore = async (fireStoreData) => {
-    try {
-      await setDoc(doc(db, "waldo", "waldoCollection"), {
-        array: fireStoreData.map((data) => data),
-      });
-      return () => {
-        console.log("succesfully store in firestore");
-      };
-    } catch (error) {
-      console.log("not succesfuly stored in firestore", error);
-    }
-  };
-  
-  sendToFireStore(defaultData);
+  sendToFireStore(data);
 
   return (
     <div className="App">
-      <MainWaldo Header={Header} Waldo={Waldo} defaultData={defaultData} />
+      <MainWaldo Header={Header} Waldo={Waldo} />
     </div>
   );
 }
