@@ -1,11 +1,36 @@
-import React from "react";
+import { useState, useEffect } from "react";
 
-export const Timer = ({time}) => {
-        return(
-            <div className="flex flex-row justify-center ">
-                <span>{("0" + Math.floor((time / 60000) % 60)).slice(-2)}:</span>
-                <span>{("0" + Math.floor((time / 1000) % 60)).slice(-2)}:</span>
-                <span>{("0" + ((time / 10) % 100)).slice(-2)}</span>
-            </div>
-        )
+export const useTimer = () => {
+  const [seconds, setSeconds] = useState(0);
+  const [minutes, setMinutes] = useState(0);
+  const [hours, setHours] = useState(0);
+  const [isRunning, setIsRunning] = useState(true);
+
+  useEffect(() => {
+    let interValId;
+    if (isRunning) {
+      interValId = setInterval(() => {
+        setSeconds((prevSeconds) => {
+          if (prevSeconds === 59) {
+            setMinutes((prevMinutes) => {
+              if (prevMinutes === 59) {
+                setHours((prevHours) => prevHours + 1);
+                return 0;
+              } else {
+                return prevMinutes + 1;
+              }
+            });
+            return 0;
+          } else {
+            return prevSeconds + 1;
+          }
+        });
+      }, 1000);
+    }
+    return () => clearInterval(interValId);
+  }, [isRunning]);
+
+  return{
+    seconds, minutes, hours, setIsRunning
+  }
 };
