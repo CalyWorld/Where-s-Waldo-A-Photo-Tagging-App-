@@ -9,11 +9,15 @@ export const Dashboard = () => {
   return (
     <div>
       {fireStoreusers.length > 0 ? (
-        fireStoreusers.map((data) => (
+        fireStoreusers.sort((a, b)=>{
+          const timeA = (a.hourTimer * 3600) + (a.minuteTimer * 60) + (a.secondTimer);
+          const timeB = (b.hourTimer * 3600) + (b.minuteTimer * 60) + (b.secondTimer);
+          return timeA - timeB;
+        }).map((data) => (
           <div key={data.id} className="flex justify-around mt-5">
-            <div className="w-20">{data.name}</div>
+            <div className="w-20 flex justify-center">{data.name}</div>
             <div>
-              {data.hourTimer}:{data.minuteTimer}:{data.secondTimer}
+              {data.hourTimer}h:{data.minuteTimer}m:{data.secondTimer}s
             </div>
           </div>
         ))
