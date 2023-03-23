@@ -1,21 +1,22 @@
 import React from "react";
-  export const Dropdown = ({ data, setModal, clickPosition, CheckCoord, setFirestoreData, setFound, setShowMatchFound  }) => {
+  export const Dropdown = ({ fireStoredata, setModal, clickPosition, CheckCoord, setFirestoreData, setFound, setShowMatchFound  }) => {
   let dropDownMenuStyling = {
     position: "absolute",
     left: `${clickPosition.x}%`,
     top: `${clickPosition.y}%`,
-    width: "30%",
+    width: "20%",
     background: "white",
     borderRadius: "0.375rem",
   };
 
-  let dropDownMenu = data.map((eachPhoto) => (
+  // console.log(clickPosition.x, clickPosition.y)
+  let dropDownMenu = fireStoredata.map((eachPhoto) => (
     <div key={eachPhoto.id}>
       <img
         src={eachPhoto.src}
         className="w-10 h-10"
         onClick={() => {
-          CheckCoord(eachPhoto, clickPosition.x, clickPosition.y, data, setModal, setFirestoreData, setFound, setShowMatchFound);
+          CheckCoord(eachPhoto, clickPosition.x, clickPosition.y, fireStoredata, setModal, setFirestoreData, setFound, setShowMatchFound);
         }}
         alt="drop-down"
       />
@@ -24,14 +25,13 @@ import React from "react";
 
   return (
     <div style={dropDownMenuStyling}>
-      <span className="flex justify-end">
+       <div className="flex justify-end items-center h-5"> 
         <i
-          className="fa-sharp fa-solid fa-xmark-large"
+          className="fa-solid fa-xmark fa-lg"
           onClick={() => {
             setModal(false);
           }}
-        ></i>
-      </span>
+        ></i></div>
       {dropDownMenu}
     </div>
   );

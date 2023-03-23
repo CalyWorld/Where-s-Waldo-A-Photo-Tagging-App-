@@ -1,3 +1,3 @@
-export const isFoundTrue = (data) =>{
-    return data.every((obj) => obj.found);
-}
+export const isFoundTrue = (data) => {
+  return data.every((eachData) => eachData.found);
+};

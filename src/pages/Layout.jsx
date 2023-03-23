@@ -4,17 +4,27 @@ export const Layout = () => {
   return (
     <>
       <nav>
-        <ul className="flex justify-between">
+        <ul className="flex justify-around">
           <li>
-            <Link to="/">HomeLogo</Link>
+            <Link to="/">
+              <img
+                className="w-10"
+                src="https://cdn.mobygames.com/covers/7101777-wheres-waldo-the-fantastic-journey-macintosh-front-cover.png"
+                alt="homepage-logo"
+              />
+            </Link>
           </li>
           <li className="flex justify-center items-center gap-4">
-            <Link to="/Game">Game</Link>
-            <Link to="/Dashboard">Dashboard</Link>
+            <button className="rounded-md">
+              <Link to="/Game">Game</Link>
+            </button>
+            <button className="rounded-md">
+              <Link to="/Dashboard">Dashboard</Link>
+            </button>
           </li>
         </ul>
       </nav>
-      <Outlet/>
+      <Outlet />
     </>
   );
 };

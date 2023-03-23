@@ -14,8 +14,8 @@ export const CheckCoord = async (
   console.log(xCoord, yCoord);
   console.log(eachPhoto.x, eachPhoto.y);
   if (
-    eachPhoto.x - 3 <= xCoord &&
-    xCoord <= eachPhoto.x + 3 &&
+    eachPhoto.x - 10 <= xCoord &&
+    xCoord <= eachPhoto.x + 10 &&
     eachPhoto.y - 10 <= yCoord &&
     yCoord <= eachPhoto.y + 10
   ) {
