@@ -4,12 +4,11 @@ import React from "react";
     position: "absolute",
     left: `${clickPosition.x}%`,
     top: `${clickPosition.y}%`,
-    width: "20%",
+    width: "30%",
     background: "white",
     borderRadius: "0.375rem",
   };
 
-  // console.log(clickPosition.x, clickPosition.y)
   let dropDownMenu = fireStoredata.map((eachPhoto) => (
     <div key={eachPhoto.id}>
       <img

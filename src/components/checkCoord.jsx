@@ -14,10 +14,10 @@ export const CheckCoord = async (
   console.log(xCoord, yCoord);
   console.log(eachPhoto.x, eachPhoto.y);
   if (
-    eachPhoto.x - 10 <= xCoord &&
-    xCoord <= eachPhoto.x + 10 &&
-    eachPhoto.y - 10 <= yCoord &&
-    yCoord <= eachPhoto.y + 10
+    eachPhoto.x - 5 <= xCoord &&
+    xCoord <= eachPhoto.x + 5 &&
+    eachPhoto.y - 5 <= yCoord &&
+    yCoord <= eachPhoto.y + 5
   ) {
     let updatedArray = data.map((eachWaldo) =>
       eachWaldo.id === eachPhoto.id ? { ...eachPhoto, found: true } : eachWaldo

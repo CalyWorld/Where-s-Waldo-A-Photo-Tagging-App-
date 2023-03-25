@@ -1,17 +1,21 @@
-import { useState } from "react";
-import { getDoc } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { getDocs, collection } from "firebase/firestore";
+import { db } from "../firebase";
 
-export const useFetchUsers = (url) => {
+export const useFetchUsers = () => {
   const [fireStoreusers, setFirestoreusers] = useState([]);
+  const userDocRef = collection(db, "users");
+  useEffect(() => {
     const fetchData = async () => {
       try {
-        const document = await getDoc(url);
-        let data = document.data().users;
+        const querySnapshot = await getDocs(userDocRef);
+        let data = querySnapshot.docs.map((doc) => doc.data());
         setFirestoreusers(data);
       } catch (error) {
         console.log("Data not sucessfully gotten from firestore", error);
       }
     };
-    fetchData();
+    fetchData();  
+  }, [userDocRef]);
   return { fireStoreusers};
 };

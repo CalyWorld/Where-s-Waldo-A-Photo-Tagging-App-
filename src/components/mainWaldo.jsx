@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { Dropdown } from "./DropDown";
-import { doc } from "firebase/firestore";
-import { db } from "../firebase";
 import { CheckCoord } from "./checkCoord";
 import { useFetchData } from "/Users/cal/Where-s-Waldo-A-Photo-Tagging-App-/src/hooks/useFetchData.jsx";
 
@@ -10,14 +8,13 @@ export const MainWaldo = ({ Header, Waldo, data }) => {
   const [matchFound, setFound] = useState(false);
   const [showMatchFound, setShowMatchFound] = useState(false);
 
-  //get data from firestore
-  const docRef = doc(db, "waldo", "waldoCollection");
 
-  const { fireStoredata, loading, setFirestoreData } = useFetchData(docRef);
+  //custom hook to fetch data from firestore and return the state and setter variable
+  const { fireStoredata, loading, setFirestoreData } = useFetchData();
 
-  
-  if(loading){
-    return (<div>Loading</div>)
+  //hold for rendering the winner form dialog box when all found property is true in firestore data array
+  if (loading) {
+    return <div>Loading</div>;
   }
 
   return (
