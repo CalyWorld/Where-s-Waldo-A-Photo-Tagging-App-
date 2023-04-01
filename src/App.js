@@ -8,7 +8,7 @@ import { MainWaldo } from "./components/MainWaldo";
 import { Waldo } from "./components/Waldo";
 import { Header } from "./components/Header";
 import { sendToFireStore } from "./components/sendToFireStore";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import { HomePage } from "./pages/HomePage";
 import { Layout } from "./pages/Layout";
 import { Dashboard } from "./pages/Dashboard";
