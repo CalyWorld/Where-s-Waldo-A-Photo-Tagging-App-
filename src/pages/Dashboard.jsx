@@ -34,7 +34,7 @@ export const Dashboard = () => {
                 </div>
                 <div>{data.name}</div>
               </div>
-              <div className>
+              <div>         
                 {data.hourTimer}h:{data.minuteTimer}m:{data.secondTimer}s
               </div>
             </div>

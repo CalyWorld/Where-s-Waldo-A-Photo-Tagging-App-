@@ -33,7 +33,8 @@ export const Waldo = ({
   const [userCollection, setUserCollection] = useState([]);
   let found = isFoundTrue(fireStoredata);
   const [isFound, setIsFound] = useState(false);
-
+// 
+  // console.log(typeof(found));
   //renders if all found property is true
   const isGameOver = (event) => {
     if (found === false) {
