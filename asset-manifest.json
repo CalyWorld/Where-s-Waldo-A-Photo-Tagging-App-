@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/CalyWorld/Where-s-Waldo-A-Photo-Tagging-App-.git/static/css/main.6183d084.css",
+    "main.js": "/CalyWorld/Where-s-Waldo-A-Photo-Tagging-App-.git/static/js/main.aacd967d.js",
+    "static/js/787.783ebc69.chunk.js": "/CalyWorld/Where-s-Waldo-A-Photo-Tagging-App-.git/static/js/787.783ebc69.chunk.js",
+    "static/media/waldo.jpeg": "/CalyWorld/Where-s-Waldo-A-Photo-Tagging-App-.git/static/media/waldo.8b871ac1382de68197ba.jpeg",
+    "static/media/waldoP.png": "/CalyWorld/Where-s-Waldo-A-Photo-Tagging-App-.git/static/media/waldoP.210cac88e1eb285ad260.png",
+    "static/media/odlaw.jpg": "/CalyWorld/Where-s-Waldo-A-Photo-Tagging-App-.git/static/media/odlaw.f34b5260e086e9e07982.jpg",
+    "index.html": "/CalyWorld/Where-s-Waldo-A-Photo-Tagging-App-.git/index.html",
+    "main.6183d084.css.map": "/CalyWorld/Where-s-Waldo-A-Photo-Tagging-App-.git/static/css/main.6183d084.css.map",
+    "main.aacd967d.js.map": "/CalyWorld/Where-s-Waldo-A-Photo-Tagging-App-.git/static/js/main.aacd967d.js.map",
+    "787.783ebc69.chunk.js.map": "/CalyWorld/Where-s-Waldo-A-Photo-Tagging-App-.git/static/js/787.783ebc69.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6183d084.css",
+    "static/js/main.aacd967d.js"
+  ]
+}
