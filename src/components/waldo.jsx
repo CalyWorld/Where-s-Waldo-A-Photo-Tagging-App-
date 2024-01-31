@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import waldo from "/Users/cal/Where-s-Waldo-A-Photo-Tagging-App-/src/assets/waldo.jpeg";
+import waldo from "../assets/waldo.jpeg";
 import { isFoundTrue } from "./isFound";
 import { useTimer } from "./timer";
 import { v4 as uuidv4 } from "uuid";
@@ -33,7 +33,7 @@ export const Waldo = ({
   const [userCollection, setUserCollection] = useState([]);
   let found = isFoundTrue(fireStoredata);
   const [isFound, setIsFound] = useState(false);
-// 
+  //
   // console.log(typeof(found));
   //renders if all found property is true
   const isGameOver = (event) => {

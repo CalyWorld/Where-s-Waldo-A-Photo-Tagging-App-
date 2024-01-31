@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import waldoP from "/Users/cal/Where-s-Waldo-A-Photo-Tagging-App-/src/assets/waldoP.png";
-import odlaw from "/Users/cal/Where-s-Waldo-A-Photo-Tagging-App-/src/assets/odlaw.jpg";
-import wizard from "/Users/cal/Where-s-Waldo-A-Photo-Tagging-App-/src/assets/wizard.jpeg";
+import waldoP from "../assets/waldoP.png";
+import odlaw from "../assets/odlaw.jpg";
+import wizard from "../assets/wizard.jpeg";
 export const Header = ({
   matchFound,
   setFound,
@@ -31,7 +31,11 @@ export const Header = ({
         </ul>
       </div>
       <div>
-        {showMatchFound && <div className="flex justify-center">{matchFound ? "Matched" : "Not Matched"}</div>}
+        {showMatchFound && (
+          <div className="flex justify-center">
+            {matchFound ? "Matched" : "Not Matched"}
+          </div>
+        )}
       </div>
     </div>
   );

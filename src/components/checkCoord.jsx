@@ -8,9 +8,8 @@ export const CheckCoord = async (
   setModal,
   setFirestoreData,
   setFound,
-  setShowMatchFound
+  setShowMatchFound,
 ) => {
-
   console.log(xCoord, yCoord);
   console.log(eachPhoto.x, eachPhoto.y);
   if (
@@ -20,7 +19,7 @@ export const CheckCoord = async (
     yCoord <= eachPhoto.y + 5
   ) {
     let updatedArray = data.map((eachWaldo) =>
-      eachWaldo.id === eachPhoto.id ? { ...eachPhoto, found: true } : eachWaldo
+      eachWaldo.id === eachPhoto.id ? { ...eachPhoto, found: true } : eachWaldo,
     );
     setModal(false);
     setFirestoreData(updatedArray);
@@ -32,8 +31,5 @@ export const CheckCoord = async (
   } else {
     setShowMatchFound(true);
     setFound(false);
-    return;
   }
-
-  
 };

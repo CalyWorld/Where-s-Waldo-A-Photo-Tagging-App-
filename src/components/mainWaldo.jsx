@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { Dropdown } from "./DropDown";
 import { CheckCoord } from "./checkCoord";
-import { useFetchData } from "/Users/cal/Where-s-Waldo-A-Photo-Tagging-App-/src/hooks/useFetchData.jsx";
+import { useFetchData } from "../hooks/useFetchData";
 
 export const MainWaldo = ({ Header, Waldo, data }) => {
   const [openModal, setModal] = useState(false);
   const [matchFound, setFound] = useState(false);
   const [showMatchFound, setShowMatchFound] = useState(false);
-
 
   //custom hook to fetch data from firestore and return the state and setter variable
   const { fireStoredata, loading, setFirestoreData } = useFetchData();
