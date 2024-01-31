@@ -7,10 +7,13 @@ export const Dashboard = () => {
     "https://cdn-icons-png.flaticon.com/512/2583/2583350.png",
     "https://cdn-icons-png.flaticon.com/512/2583/2583448.png",
   ];
- 
+  console.log(fireStoreusers);
+
   return (
     <div>
-      <div className= "flex justify-center"><h2>Game Winners so far, try to beat the top score</h2></div>
+      <div className="flex justify-center">
+        <h2>Game Winners so far, try to beat the top score</h2>
+      </div>
       {fireStoreusers.length > 0 ? (
         fireStoreusers
           .sort((a, b) => {
@@ -34,7 +37,7 @@ export const Dashboard = () => {
                 </div>
                 <div>{data.name}</div>
               </div>
-              <div>         
+              <div>
                 {data.hourTimer}h:{data.minuteTimer}m:{data.secondTimer}s
               </div>
             </div>
