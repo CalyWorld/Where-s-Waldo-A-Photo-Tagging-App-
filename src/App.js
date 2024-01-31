@@ -12,6 +12,7 @@ import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import { HomePage } from "./pages/HomePage";
 import { Layout } from "./pages/Layout";
 import { Dashboard } from "./pages/Dashboard";
+
 function App() {
   let data = [
     {
