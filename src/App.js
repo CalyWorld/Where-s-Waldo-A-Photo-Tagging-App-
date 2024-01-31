@@ -1,7 +1,7 @@
 import "./App.css";
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
-import waldoP from "./assets/waldo.jpeg";
+import waldoP from "./assets/waldoP.png";
 import odlaw from "./assets/odlaw.jpg";
 import wizard from "./assets/wizard.jpeg";
 import { MainWaldo } from "./components/MainWaldo";
